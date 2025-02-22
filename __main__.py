@@ -94,8 +94,9 @@ def save_notified_date_times(date_times):
 
 
 def notify(date_times):
+    print("Here are the available date times:")
     for date_time in date_times:
-        print(f"Notify: {date_time}")
+        print(date_time.strftime("%A %d %B at %H:%M"))
 
 
 def main():
