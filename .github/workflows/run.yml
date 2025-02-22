@@ -23,6 +23,7 @@ jobs:
       - name: Run main.py
         run: |
           python .
+          git status --porcelain already_notified_datetimes.txt
           if [ -n "$(git status --porcelain already_notified_datetimes.txt)" ]; then
             echo "CHANGES=true" >> $GITHUB_ENV
           else
