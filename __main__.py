@@ -8,7 +8,7 @@ def get_available_relevant_date_times():
     for i in range(config.next_months + 1):
         month = (datetime.datetime.now().month + i) % 12
         year = datetime.datetime.now().year + (datetime.datetime.now().month + i) // 12
-        print(f"Checking availability for {year}/{month}")
+        # print(f"Checking availability for {year}/{month}")
         url = (
             f"https://widget-api.formitable.com/api/availability/{config.restaurant_id}/month"
             f"/{month}/{year}/{config.number_of_guests}/en"
@@ -26,9 +26,9 @@ def get_available_relevant_date_times():
                     )
                 )
 
-    print("Available dates:")
-    for date in available_dates:
-        print(date.strftime("%Y-%m-%d"))
+    # print("Available dates:")
+    # for date in available_dates:
+    #     print(date.strftime("%Y-%m-%d"))
 
     # Select the available dates that match the filters
     filtered_dates = []
@@ -36,9 +36,9 @@ def get_available_relevant_date_times():
         if date.weekday() in config.days_of_the_week:
             filtered_dates.append(date)
 
-    print("Filtered dates:")
-    for date in filtered_dates:
-        print(date.strftime("%Y-%m-%d"))
+    # print("Filtered dates:")
+    # for date in filtered_dates:
+    #     print(date.strftime("%Y-%m-%d"))
 
     # gather data for each of the filtered dates
     available_date_times = []
@@ -60,9 +60,9 @@ def get_available_relevant_date_times():
                     )
                 )
 
-    print("Available date times:")
-    for date_time in available_date_times:
-        print(date_time.strftime("%Y-%m-%d %H:%M"))
+    # print("Available date times:")
+    # for date_time in available_date_times:
+    #     print(date_time.strftime("%Y-%m-%d %H:%M"))
 
     # Select the available date times that match the filters
     filtered_date_times = []
@@ -70,9 +70,9 @@ def get_available_relevant_date_times():
         if config.from_hour <= date_time.hour < config.to_hour:
             filtered_date_times.append(date_time)
 
-    print("Filtered date times:")
-    for date_time in filtered_date_times:
-        print(date_time.strftime("%Y-%m-%d %H:%M"))
+    # print("Filtered date times:")
+    # for date_time in filtered_date_times:
+    #     print(date_time.strftime("%Y-%m-%d %H:%M"))
 
     return filtered_date_times
 
