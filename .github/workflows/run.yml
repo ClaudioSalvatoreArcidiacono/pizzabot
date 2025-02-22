@@ -23,14 +23,17 @@ jobs:
       - name: Run main.py
         run: |
           python .
-
-      - name: Commit changes
-        run: |
+          if [ -n "$(git status --porcelain already_notified_datetimes.txt)" ]; then
+            echo "CHANGES=true" >> $GITHUB_ENV
+          else
+            echo "CHANGES=false" >> $GITHUB_ENV
+          fi
+          # Commit changes to already_notified_datetimes.txt
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add already_notified_datetimes.txt
           git commit -m "Update notified date times" || echo "No changes to commit"
-
-      - name: Stop the workflow
-        run: exit 0
-
+          if [ "$CHANGES" = "true" ]; then
+            exit 1
+            # This will trigger the failure of the workflow and will trigger the notification
+          fi

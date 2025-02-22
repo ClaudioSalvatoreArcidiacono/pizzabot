@@ -108,9 +108,6 @@ def main():
     ]
     notify(datetime_to_notify)
     save_notified_date_times(datetime_to_notify)
-    if datetime_to_notify:
-        exit(1)
-        # This will break the pipeline, triggering an email from github actions
 
 
 if __name__ == "__main__":
