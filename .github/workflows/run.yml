@@ -1,0 +1,34 @@
+name: Scheduled Run of Main Script
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Run main.py
+        run: |
+          python .
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add already_notified_datetimes.txt
+          git commit -m "Update notified date times" || echo "No changes to commit"
+
+      - name: Stop the workflow
+        run: exit 0
+
