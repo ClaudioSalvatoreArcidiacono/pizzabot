@@ -24,9 +24,9 @@ jobs:
         run: |
           python .
           if [ -n "$(git status --porcelain already_notified_datetimes.txt)" ]; then
-            echo "true" >> $CHANGES
+            CHANGES="true"
           else
-            echo "false" >> $CHANGES
+            CHANGES="false"
           fi
           # Commit changes to already_notified_datetimes.txt
           git config --local user.email "action@github.com"
