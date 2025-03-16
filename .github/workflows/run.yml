@@ -36,7 +36,3 @@ jobs:
           git add already_notified_datetimes.txt
           git commit -m "Update notified date times" || echo "No changes to commit"
           git push
-          if [ "$CHANGES" = "true" ]; then
-            exit 1
-            # This will trigger the failure of the workflow and will trigger the notification
-          fi

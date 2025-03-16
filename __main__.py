@@ -97,7 +97,7 @@ def notify(date_times):
     for date_time in date_times:
         message += date_time.strftime("%A %d %B at %H:%M") + "\n"
     print(message)
-    asyncio.run(bot.send_message(chat_id, chat_id))
+    asyncio.run(bot.send_message(chat_id, message))
 
 
 def main():
