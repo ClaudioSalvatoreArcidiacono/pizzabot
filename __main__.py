@@ -5,6 +5,7 @@ import telegram
 import os
 import asyncio
 
+
 def get_available_relevant_date_times():
     available_dates = []
     for i in range(config.next_months + 1):
@@ -93,9 +94,10 @@ def notify(date_times):
     bot_api_token = os.environ["TELEGRAM_BOT_API_TOKEN"]
     chat_id = os.environ["TELEGRAM_CHAT_ID"]
     bot = telegram.Bot(bot_api_token)
-    message = "Here are the available date times:\n"
+    message = "I found some new availabilities for you 😋\n"
+    message += "🍕🌟 Here are the available date times: 🌟🍕\n\n"
     for date_time in date_times:
-        message += date_time.strftime("%A %d %B at %H:%M") + "\n"
+        message += f"  - 🗓️ {date_time.strftime('%A, %d %B')} at ⏰ {date_time.strftime('%H:%M')} 🍕\n\n"
     print(message)
     asyncio.run(bot.send_message(chat_id, message))
 
