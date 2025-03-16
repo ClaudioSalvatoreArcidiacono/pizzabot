@@ -42,7 +42,7 @@ def get_available_relevant_date_times():
             f"{date.strftime('%Y-%m-%d')}?groupSize={config.number_of_guests}"
         )
         response = requests.get(url)
-        for availability_time in response.json():
+        for availability_time in response.json()["timeslots"]:
             if availability_time["availabilityType"] == "Available":
                 available_date_times.append(
                     datetime.datetime(
