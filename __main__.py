@@ -1,7 +1,9 @@
 import requests
 import config
 import datetime
-
+import telegram
+import os
+import asyncio
 
 def get_available_relevant_date_times():
     available_dates = []
@@ -88,9 +90,14 @@ def save_notified_date_times(date_times):
 
 
 def notify(date_times):
-    print("Here are the available date times:")
+    bot_api_token = os.environ["TELEGRAM_BOT_API_TOKEN"]
+    chat_id = os.environ["TELEGRAM_CHAT_ID"]
+    bot = telegram.Bot(bot_api_token)
+    message = "Here are the available date times:\n"
     for date_time in date_times:
-        print(date_time.strftime("%A %d %B at %H:%M"))
+        message += date_time.strftime("%A %d %B at %H:%M") + "\n"
+    print(message)
+    asyncio.run(bot.send_message(chat_id, chat_id))
 
 
 def main():

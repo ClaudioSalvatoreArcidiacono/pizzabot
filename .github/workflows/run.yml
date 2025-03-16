@@ -22,6 +22,8 @@ jobs:
 
       - name: Run main.py
         run: |
+          export TELEGRAM_BOT_API_TOKEN=${{ secrets.TELEGRAM_BOT_API_TOKEN }}
+          export TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
           python .
           if [ -n "$(git status --porcelain already_notified_datetimes.txt)" ]; then
             CHANGES="true"
