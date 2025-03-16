@@ -11,7 +11,7 @@ def get_available_relevant_date_times():
     for i in range(config.next_months + 1):
         month = (datetime.datetime.now().month + i) % 12
         year = datetime.datetime.now().year + (datetime.datetime.now().month + i) // 12
-        print(f"Checking availability for {year}/{month}")
+        # print(f"Checking availability for {year}/{month}")
         url = (
             f"https://live.tebi.co/api/ledgers/{config.restaurant_id}/reservation-months/"
             f"{year}-{month}?groupSize={config.number_of_guests}"
@@ -23,9 +23,9 @@ def get_available_relevant_date_times():
                     datetime.datetime.strptime(availability_date["date"], "%Y-%m-%d")
                 )
 
-    print("Available dates:")
-    for date in available_dates:
-        print(date.strftime("%Y-%m-%d"))
+    # print("Available dates:")
+    # for date in available_dates:
+    #     print(date.strftime("%Y-%m-%d"))
 
     # Select the available dates that match the filters
     filtered_dates = []
@@ -33,9 +33,9 @@ def get_available_relevant_date_times():
         if date.weekday() in config.days_of_the_week:
             filtered_dates.append(date)
 
-    print("Filtered dates:")
-    for date in filtered_dates:
-        print(date.strftime("%Y-%m-%d"))
+    # print("Filtered dates:")
+    # for date in filtered_dates:
+    #     print(date.strftime("%Y-%m-%d"))
 
     # gather data for each of the filtered dates
     available_date_times = []
@@ -57,9 +57,9 @@ def get_available_relevant_date_times():
                     )
                 )
 
-    print("Available date times:")
-    for date_time in available_date_times:
-        print(date_time.strftime("%Y-%m-%d %H:%M"))
+    # print("Available date times:")
+    # for date_time in available_date_times:
+    #     print(date_time.strftime("%Y-%m-%d %H:%M"))
 
     # Select the available date times that match the filters
     filtered_date_times = []
@@ -67,9 +67,9 @@ def get_available_relevant_date_times():
         if config.from_hour <= date_time.hour < config.to_hour:
             filtered_date_times.append(date_time)
 
-    print("Filtered date times:")
-    for date_time in filtered_date_times:
-        print(date_time.strftime("%Y-%m-%d %H:%M"))
+    # print("Filtered date times:")
+    # for date_time in filtered_date_times:
+    #     print(date_time.strftime("%Y-%m-%d %H:%M"))
 
     return filtered_date_times
 
@@ -110,8 +110,9 @@ def main():
         for date_time in available_date_times
         if date_time not in already_notified_date_times
     ]
-    notify(datetime_to_notify)
-    save_notified_date_times(datetime_to_notify)
+    if datetime_to_notify:
+        notify(datetime_to_notify)
+        save_notified_date_times(datetime_to_notify)
 
 
 if __name__ == "__main__":
