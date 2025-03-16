@@ -95,9 +95,9 @@ def notify(date_times):
     chat_id = os.environ["TELEGRAM_CHAT_ID"]
     bot = telegram.Bot(bot_api_token)
     message = "I found some new availabilities for you 😋\n"
-    message += "🍕🌟 Here are the available date times: 🌟🍕\n\n"
+    message += "🍕🌟 Here are the available date times:\n"
     for date_time in date_times:
-        message += f"  - 🗓️ {date_time.strftime('%A, %d %B')} at ⏰ {date_time.strftime('%H:%M')} 🍕\n\n"
+        message += f"  - 🗓️ {date_time.strftime('%A, %d %B')} at {date_time.strftime('%H:%M')} 🍕\n"
     print(message)
     asyncio.run(bot.send_message(chat_id, message))
 
